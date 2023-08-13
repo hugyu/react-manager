@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Layout } from 'antd'
+import { Layout, Watermark } from 'antd'
 import NavHeader from '@/components/NavHeader'
 import Menu from '@/components/Menu'
 import { Outlet } from 'react-router-dom'
@@ -20,7 +20,8 @@ const App: React.FC = () => {
     getUserInfoReq()
   },[])
   return (
-    <Layout>
+    <Watermark content={store.userInfo.userName}>
+      <Layout>
       <Sider
         breakpoint='lg'
         collapsedWidth='0'
@@ -43,6 +44,7 @@ const App: React.FC = () => {
         <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
       </Layout>
     </Layout>
+    </Watermark>
   )
 }
 
