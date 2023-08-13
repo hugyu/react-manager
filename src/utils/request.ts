@@ -1,9 +1,11 @@
+import { Result } from "@/types/Result";
 import { message } from "antd";
 import axios, { AxiosError } from "axios";
 import { showLoading ,hideLoading} from "./loading";
+import storage from "./storage";
 
 const instance = axios.create({
-  baseURL: 'import.meta.env.VITE_BASE_API',
+  baseURL: import.meta.env.VITE_BASE_API,
   timeout: 8000,
   timeoutErrorMessage: '请求超时，请稍后再试',
   withCredentials:true
@@ -11,10 +13,11 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(config => {
   showLoading()
-  const token = localStorage.getItem('token');
+  const token = storage.get('token');
   if (token) {
-    config.headers.Authorization='Token::'+token
+    config.headers.Authorization = 'Token::' + token
   }
+  config.headers.icode='8EC18757D8EF738B'
   return {
     ...config
   }
@@ -27,14 +30,14 @@ instance.interceptors.request.use(config => {
 // 添加响应拦截器
 instance.interceptors.response.use(
   response => {
-    const data = response.data
+    const data:Result = response.data
     hideLoading()
     if (data.code === 500001) {
-      message.error(data.message)
-      localStorage.removeItem('token')
+      message.error(data.msg)
+      storage.remove('token')
       location.href='/login'
     } else if (data.code != 0) {
-      message.error(data.message)
+      message.error(data.msg)
       return Promise.reject(data)
     }
     return data.data
