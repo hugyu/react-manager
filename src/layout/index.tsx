@@ -1,9 +1,10 @@
 import React from 'react'
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
-import { Layout, Menu, theme } from 'antd'
+import { Layout, theme } from 'antd'
 import NavHeader from '@/components/NavHeader'
+import Menu from '@/components/Menu'
 
-const { Header, Content, Footer, Sider } = Layout
+const { Content, Footer, Sider } = Layout
 
 const App: React.FC = () => {
   const {
@@ -22,17 +23,7 @@ const App: React.FC = () => {
           console.log(collapsed, type)
         }}
       >
-        <div className='demo-logo-vertical' />
-        <Menu
-          theme='dark'
-          mode='inline'
-          defaultSelectedKeys={['4']}
-          items={[UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map((icon, index) => ({
-            key: String(index + 1),
-            icon: React.createElement(icon),
-            label: `nav ${index + 1}`
-          }))}
-        />
+        <Menu/>
       </Sider>
       <Layout>
         <NavHeader />
