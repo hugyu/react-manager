@@ -1,23 +1,35 @@
-import { Button, Form, Input, message } from 'antd'
-import './index.less'
-import {login} from '@/api/api'
-import storage from '@/utils/storage';
-import { LoginParams } from '@/types/LoginParams';
+import { Button, Card, Form, Input, message } from 'antd'
+import classNames from 'classnames'
+import './index.module.less'
+import styles from './index.module.less'
+import { login } from '@/api/api'
+import storage from '@/utils/storage'
+import { LoginParams } from '@/types/LoginParams'
+import { useDarkMode } from '@/hook'
 function Login() {
+  //  userName: '562168176', userPwd: '123456'
+  // 获取系统是否为暗黑主题
+  const isDarkMode = useDarkMode()
+  const backgroundColor = isDarkMode ? '#252525' : 'white'
   // 登录成功后写token
-  const onFinish = async(values:LoginParams) => {
-   const data= await login(values);
+  const onFinish = async (values: LoginParams) => {
+    const data = await login(values)
     storage.set('token', data)
     // 显示提示信息
     message.success('登录成功')
     // 保留登录后的页面状态
     const params = new URLSearchParams(location.search)
-    params.get('callback')||'/welcome'
+    params.get('callback') || '/welcome'
   }
+  // 组合命名
+  const loginWrapperClass = classNames({
+    [styles.loginWrapper]: true,
+    [styles.dark]: isDarkMode
+  })
   return (
-    <div className='login'>
-      <div className='login-wrapper'>
-        <div className='title'>系统登录</div>
+    <div className={styles.login} style={{ backgroundColor }}>
+      <Card className={loginWrapperClass}>
+        <div className={styles.title}>系统登录</div>
         <Form
           name='basic'
           initialValues={{ remember: true }}
@@ -39,7 +51,7 @@ function Login() {
             </Button>
           </Form.Item>
         </Form>
-      </div>
+      </Card>
     </div>
   )
 }
