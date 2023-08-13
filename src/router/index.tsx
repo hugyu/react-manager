@@ -1,6 +1,6 @@
 import Error403 from '@/views/403'
 import NotFound from '@/views/404'
-import Login from '@/views/Login'
+import Login from '@/views/Login/Login'
 import Welcome from '@/views/Welcome'
 import {createHashRouter, Navigate,createBrowserRouter} from 'react-router-dom'
 
