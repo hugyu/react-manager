@@ -8,7 +8,10 @@ const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_API,
   timeout: 8000,
   timeoutErrorMessage: '请求超时，请稍后再试',
-  withCredentials: true
+  withCredentials: true,
+  headers: {
+    icode: '8EC18757D8EF738B'
+  }
 })
 // 添加请求拦截器
 instance.interceptors.request.use(
@@ -18,7 +21,6 @@ instance.interceptors.request.use(
     if (token) {
       config.headers.Authorization = 'Token::' + token
     }
-    config.headers.icode = '8EC18757D8EF738B'
     return {
       ...config
     }
@@ -61,7 +63,7 @@ interface IConfig {
 }
 export default {
   get<T>(url: string, params?: object, options: IConfig = { showLoading: true, showError: true }): Promise<T> {
-    return instance.get(url, { params,...options }, )
+    return instance.get(url, { params, ...options })
   },
   post<T>(url: string, params?: object, options: IConfig = { showLoading: true, showError: true }): Promise<T> {
     return instance.post(url, params, options)
