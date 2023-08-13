@@ -2,40 +2,39 @@ import Error403 from '@/views/403'
 import NotFound from '@/views/404'
 import Login from '@/views/Login/Login'
 import Welcome from '@/views/Welcome'
-import { createHashRouter, Navigate, createBrowserRouter } from 'react-router-dom'
+import { Navigate, createBrowserRouter } from 'react-router-dom'
 import Layout from '@/layout'
-
 
 const router = [
   {
     path: '/',
-    element: <Navigate to='/welcome'/>
+    element: <Navigate to='/welcome' />
   },
   {
     path: '/login',
-    element: <Login/>
+    element: <Login />
   },
   {
     element: <Layout />,
     children: [
       {
         path: '/welcome',
-        element:<Welcome/>
+        element: <Welcome />
       }
     ]
   },
   {
     path: '*',
-    element: <Navigate to="/404"/>
+    element: <Navigate to='/404' />
   },
   {
     path: '/404',
-    element: <NotFound/>
+    element: <NotFound />
   },
   {
     path: '/403',
-    element: <Error403/>
+    element: <Error403 />
   }
 ]
 
-export default createHashRouter(router)
+export default createBrowserRouter(router)

@@ -7,7 +7,10 @@ import storage from '@/utils/storage'
 import { LoginParams } from '@/types/LoginParams'
 import { useDarkMode } from '@/hook'
 import { useState } from 'react'
+import store from '@/store'
+import { useNavigate } from 'react-router-dom'
 function Login() {
+  const navigate=useNavigate()
   //  userName: '562168176', userPwd: '123456'
   // 获取系统是否为暗黑主题
   const isDarkMode = useDarkMode()
@@ -16,17 +19,26 @@ function Login() {
   // 登录成功后写token
   const onFinish = async (values: LoginParams) => {
     setIsLoading(true)
-    const data:any = await login(values)
-    if (data.code!==0) {
-      return message.error('登录失败')
-    }
+    const data = await login(values)
+    // if (data.code!==0) {
+    //   return message.error('登录失败')
+    // }
     setIsLoading(false)
     storage.set('token', data)
+    // 全局状态token
+    store.token=data
     // 显示提示信息
     message.success('登录成功')
     // 保留登录后的页面状态
     const params = new URLSearchParams(location.search)
-    params.get('callback') || '/welcome'
+
+    if (!params.get('callback')) {
+      navigate('/welcome')
+    } else {
+      location.href = params.get('callback') as string
+    }
+
+
   }
   // 组合命名
   const loginWrapperClass = classNames({
@@ -45,11 +57,11 @@ function Login() {
           autoComplete='off'
         >
           <Form.Item<any> name='userName' rules={[{ required: true, message: 'Please input your username!' }]}>
-            <Input />
+            <Input defaultValue={'562168176'}/>
           </Form.Item>
 
           <Form.Item<any> name='userPwd' rules={[{ required: true, message: 'Please input your password!' }]}>
-            <Input.Password />
+            <Input.Password defaultValue={'123456'}/>
           </Form.Item>
 
           <Form.Item>

@@ -5,8 +5,12 @@ declare module 'axios' {
   }
 }
 
+import { UserInfo } from '@/types/UserInfo';
 import request from '@/utils/request'
 
 export const login = (params: any) => {
-  return request.post('users/login', params,{showLoading:false,showError:false});
+  return request.post<string>('users/login', params,{showLoading:false,showError:false});
+}
+export const getUserInfo = () => {
+    return request.get<UserInfo>('users/getUserInfo');
 }

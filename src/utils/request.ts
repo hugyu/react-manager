@@ -19,7 +19,9 @@ instance.interceptors.request.use(
     if (config.showLoading) showLoading()
     const token = storage.get('token')
     if (token) {
-      config.headers.Authorization = 'Token::' + token
+      // console.log('token: ' + token);
+
+      config.headers.Authorization = `Bearer ${token}`
     }
     return {
       ...config
@@ -38,7 +40,7 @@ instance.interceptors.response.use(
     if (data.code === 500001) {
       message.error(data.msg)
       storage.remove('token')
-      location.href = '/login'
+      // location.href = '/login'
     } else if (data.code != 0) {
       if (response.config.showError === false) {
         // 屏蔽不报错 抛出异常
