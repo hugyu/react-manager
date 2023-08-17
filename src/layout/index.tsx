@@ -6,8 +6,7 @@ import { Outlet } from 'react-router-dom'
 import styles from './index.module.less'
 import store from '@/store'
 import { getUserInfo } from '@/api/api'
-import DashBoard from '@/views/Dashboard'
-const { Content, Footer, Sider } = Layout
+const {Footer, Sider } = Layout
 
 const App: React.FC = () => {
   // 获取用户信息
