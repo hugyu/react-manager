@@ -5,12 +5,25 @@ declare module 'axios' {
   }
 }
 
-import { UserInfo } from '@/types/UserInfo';
+import { DashBoard } from '@/types/Dashboard'
+import { UserInfo } from '@/types/UserInfo'
 import request from '@/utils/request'
 
 export const login = (params: any) => {
-  return request.post<string>('users/login', params,{showLoading:false,showError:false});
+  return request.post<string>('users/login', params, { showLoading: false, showError: false })
 }
 export const getUserInfo = () => {
-    return request.get<UserInfo>('users/getUserInfo');
+  return request.get<UserInfo>('users/getUserInfo')
+}
+export const getReportData = () => {
+  return request.get<DashBoard.Report>('order/dashboard/getReportData')
+}
+export const getLineData = () => {
+  return request.get<DashBoard.Line>('order/dashboard/getLineData')
+}
+export const getPieData = () => {
+  return request.get<DashBoard.Pie>('order/dashboard/getPieCityData')
+}
+export const getRadarData = () => {
+  return request.get<DashBoard.Radar>('order/dashboard/getRadarData')
 }

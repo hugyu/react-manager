@@ -2,7 +2,7 @@ import { Menu } from 'antd'
 import { DesktopOutlined, SettingOutlined, TeamOutlined } from '@ant-design/icons'
 import styles from './index.module.less'
 import logo from '@/assets/logo.png'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 const SideMenu = () => {
   // 返回一个navigate对象
   const navigate=useNavigate()
@@ -11,9 +11,9 @@ const SideMenu = () => {
   }
   const items = [
     {
-      label: '工作台',
+      label: (<Link to={"/dashboard"}>工作台</Link>),
       key: '1',
-      icon: <DesktopOutlined />
+      icon: <DesktopOutlined />,
     },
     {
       label: '系统管理',
@@ -34,7 +34,7 @@ const SideMenu = () => {
         <img src={logo} alt="njupt" className={ styles.img} />
         <span>南邮货运</span>
       </div>
-      <Menu defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} mode='inline' theme='dark' items={items} />
+      <Menu mode='inline' theme='dark' items={items} />
     </div>
   )
 }

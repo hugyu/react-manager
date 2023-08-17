@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom'
 import styles from './index.module.less'
 import store from '@/store'
 import { getUserInfo } from '@/api/api'
+import DashBoard from '@/views/Dashboard'
 const { Content, Footer, Sider } = Layout
 
 const App: React.FC = () => {
@@ -36,12 +37,10 @@ const App: React.FC = () => {
       </Sider>
       <Layout>
         <NavHeader />
-        <Content className={styles.content}>
           <div className={styles.wrapper}>
-            <Outlet></Outlet>
+              <Outlet></Outlet>
           </div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
+        <Footer style={{ textAlign: 'center' ,color: '#b0aeae'}}>Copyright ©2023 React18通用后台课程 All Rights Reserved.</Footer>
       </Layout>
     </Layout>
     </Watermark>

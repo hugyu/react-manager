@@ -4,6 +4,7 @@ import Login from '@/views/Login/Login'
 import Welcome from '@/views/Welcome'
 import { Navigate, createBrowserRouter } from 'react-router-dom'
 import Layout from '@/layout'
+import DashBoardPage from '@/views/Dashboard'
 
 const router = [
   {
@@ -20,6 +21,10 @@ const router = [
       {
         path: '/welcome',
         element: <Welcome />
+      },
+      {
+        path: '/dashboard',
+        element: <DashBoardPage />
       }
     ]
   },
