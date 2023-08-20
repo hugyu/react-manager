@@ -6,6 +6,7 @@ declare module 'axios' {
 }
 
 import { DashBoard } from '@/types/Dashboard'
+import { Result } from '@/types/Result'
 import { UserInfo } from '@/types/UserInfo'
 import request from '@/utils/request'
 
@@ -26,4 +27,7 @@ export const getPieData = () => {
 }
 export const getRadarData = () => {
   return request.get<DashBoard.Radar>('order/dashboard/getRadarData')
+}
+export const getUserList = () => {
+  return request.get('users/list')
 }

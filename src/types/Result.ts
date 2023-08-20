@@ -4,3 +4,13 @@ export interface Result<T = any > {
   data: T
   msg: string
 }
+
+// 返回结果数据的定义
+export interface ResultData<T = any> {
+  list: T[],
+  page: {
+    pageNum: number,
+    pageSize: number,
+    total:number|0,
+  }
+}

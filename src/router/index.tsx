@@ -5,6 +5,7 @@ import Welcome from '@/views/Welcome'
 import { Navigate, createBrowserRouter } from 'react-router-dom'
 import Layout from '@/layout'
 import DashBoardPage from '@/views/Dashboard'
+import UserList from '@/views/system/user'
 
 const router = [
   {
@@ -25,6 +26,10 @@ const router = [
       {
         path: '/dashboard',
         element: <DashBoardPage />
+      },
+      {
+        path: '/userList',
+        element: <UserList />
       }
     ]
   },
